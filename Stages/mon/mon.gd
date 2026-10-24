@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
 var GRAVITY = 1280.0 # Pixels/second
 
@@ -27,7 +27,7 @@ const DEATH_ANIMATION_TIME = 1
 const SLIDE_STOP_VELOCITY = 1.0 # One pixel per second
 const SLIDE_STOP_MIN_TRAVEL = 1.0 # One pixel
 
-onready var initial_scale = scale
+@onready var initial_scale = scale
 var spawn_point
 
 var velocity = Vector2()
@@ -161,7 +161,7 @@ func _physics_process(delta):
 
 		# Ran against something, is it the floor? Get normal and angle
 		var n = collision.normal
-		var angle = rad2deg(acos(n.dot(Vector2(0, -1))))
+		var angle = rad_to_deg(acos(n.dot(Vector2(0, -1))))
 
 		if (collision.collider.is_in_group("players")): # Player collision
 			if (isAlive and collision.collider.isAlive):
@@ -210,7 +210,8 @@ func _physics_process(delta):
 
 	if (floor_velocity != Vector2()):
 		# If floor moves, move with floor
-		move_and_slide(floor_velocity*delta)
+		set_velocity(floor_velocity*delta)
+		move_and_slide()
 	
 	if (isAlive):
 		if (on_air_time == 0): # This means a surface(ground) collision
@@ -298,7 +299,7 @@ func die():
 		emit_signal("on_death", self.player)
 
 func ink_splash(): # Generates an ink splash where player stands
-	var splash = splash_scene.instance()
+	var splash = splash_scene.instantiate()
 	splash.set_position(self.position)
 	splash.setup(color, abs(scale.y))
 	get_parent().add_child(splash)

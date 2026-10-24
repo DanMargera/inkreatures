@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
 const GRAVITY = 1280.0 # Pixels/second
 var velocity = Vector2()
@@ -12,7 +12,7 @@ func _physics_process(delta):
 	if (collision):
 		# Ran against something, is it the floor? Get normal and angle
 		var n = collision.normal
-		var angle = rad2deg(acos(n.dot(Vector2(0, -1))))
+		var angle = rad_to_deg(acos(n.dot(Vector2(0, -1))))
 		# Check if collision is vertical/floor
 		if (angle < 0.4):
 			floor_velocity = collision.collider_velocity
@@ -20,7 +20,8 @@ func _physics_process(delta):
 			velocity.y = 0
 	if (floor_velocity != Vector2()):
 		# If floor moves, move with floor
-		move_and_slide(floor_velocity*delta)
+		set_velocity(floor_velocity*delta)
+		move_and_slide()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

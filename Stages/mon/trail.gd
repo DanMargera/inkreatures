@@ -1,4 +1,4 @@
-extends Particles2D
+extends GPUParticles2D
 
 func set_color(color_string):
 	var tex = load("res://assets/images/rastro_"+color_string+".png")

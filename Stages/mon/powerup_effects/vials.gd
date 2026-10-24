@@ -8,7 +8,7 @@ var shrinking = false
 func effect(player):
 	if (mon == null):
 		mon = player
-		mon.connect("on_death", self, "effect_finish")
+		mon.connect("on_death", Callable(self, "effect_finish"))
 		type = randi() % vial_types.size()
 		type = vial_types.SHRINK
 		match type:
@@ -34,7 +34,7 @@ func effect_finish():
 			mon.WALK_FORCE /= 0.4
 	mon.remove_powerup()
 	mon = null
-	get_node("Sprite").hide()
+	get_node("Sprite2D").hide()
 	get_parent().get_node("PowerupAnimations").stop(true)
 
 func _process(delta):
@@ -52,4 +52,4 @@ func _process(delta):
 
 func _ready():
 	set_process(true)
-	get_node("DurationTimer").connect("timeout", self, "effect_finish")
+	get_node("DurationTimer").connect("timeout", Callable(self, "effect_finish"))

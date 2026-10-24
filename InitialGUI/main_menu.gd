@@ -12,7 +12,7 @@ var cursor_offset
 func _ready():
 	set_process_input(true)
 	cursor_offset = Vector2(get_node("cursor").get_size().x + cursor_margin,0)
-	get_node("cursor").rect_global_position = Vector2(get_node("container/play").rect_global_position - cursor_offset)
+	get_node("cursor").global_position = Vector2(get_node("container/play").global_position - cursor_offset)
 
 func _input(event):
 	if (event.is_action_pressed("ui_up")):
@@ -25,15 +25,15 @@ func _input(event):
 
 func update_cursor(opt):
 	if (opt == PLAY):
-		get_node("cursor").rect_global_position = Vector2(get_node("container/play").rect_global_position - cursor_offset)
+		get_node("cursor").global_position = Vector2(get_node("container/play").global_position - cursor_offset)
 	elif (opt == OPTIONS):
-		get_node("cursor").rect_global_position = Vector2(get_node("container/options").rect_global_position - cursor_offset)
+		get_node("cursor").global_position = Vector2(get_node("container/options").global_position - cursor_offset)
 	elif (opt == QUIT):
-		get_node("cursor").rect_global_position = Vector2(get_node("container/quit").rect_global_position - cursor_offset)
+		get_node("cursor").global_position = Vector2(get_node("container/quit").global_position - cursor_offset)
 
 func select(opt):
 	if (opt == PLAY):
-		get_tree().change_scene("res://CharacterSelection/CharacterSelection.tscn")
+		get_tree().change_scene_to_file("res://CharacterSelection/CharacterSelection.tscn")
 	elif (opt == OPTIONS):
 		pass
 	elif (opt == QUIT):

@@ -5,20 +5,20 @@ var mon = null
 func effect(player):
 	if (mon == null):
 		mon = player
-		player.connect("on_death", self, "effect_finish")
+		player.connect("on_death", Callable(self, "effect_finish"))
 		get_parent().get_node("PowerupAnimations").play("UnicornStart")
-		get_node("Area2D").connect("body_entered", self, "horn_collision")
+		get_node("Area2D").connect("body_entered", Callable(self, "horn_collision"))
 		get_node("DurationTimer").start()
-		get_node("Sprite").show()
+		get_node("Sprite2D").show()
 	elif (get_node("FlipCooldown").is_stopped()):
 		mon.front_flip()
 		get_node("FlipCooldown").start()
 
 func effect_finish():
 	mon.remove_powerup()
-	get_node("Sprite").hide()
+	get_node("Sprite2D").hide()
 	get_node("DurationTimer").stop()
-	get_node("Area2D").disconnect("body_entered", self, "horn_collision")
+	get_node("Area2D").disconnect("body_entered", Callable(self, "horn_collision"))
 	mon = null
 
 func horn_collision(body):
@@ -27,4 +27,4 @@ func horn_collision(body):
 		effect_finish()
 
 func _ready():
-	get_node("DurationTimer").connect("timeout", self, "effect_finish")
+	get_node("DurationTimer").connect("timeout", Callable(self, "effect_finish"))

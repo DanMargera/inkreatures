@@ -44,7 +44,7 @@ func add_player(index, color, mon, device):
 	player.controller_device = device
 
 func game_start():
-	get_tree().change_scene("res://Stages/Stage"+var2str(selected_stage)+".tscn")
+	get_tree().change_scene_to_file("res://Stages/Stage"+var_to_str(selected_stage)+".tscn")
 	selected_stage = 1 + randi() % 2
 
 func increase_kill_count(pnum):

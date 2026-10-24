@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
 # Member variables
 const GRAVITY = 1000.0 # Pixels/second
@@ -37,7 +37,7 @@ func _physics_process(delta):
 		
 		# Ran against something, is it the floor? Get normal and angle
 		var n = collision.normal
-		var angle = rad2deg(acos(n.dot(Vector2(0, -1))))
+		var angle = rad_to_deg(acos(n.dot(Vector2(0, -1))))
 		
 		if (collision.collider.is_in_group("players")):
 			emit_signal("catch", collision.collider)
@@ -52,7 +52,8 @@ func _physics_process(delta):
 	
 	if (floor_velocity != Vector2()):
 		# If floor moves, move with floor
-		move_and_slide(floor_velocity*delta)
+		set_velocity(floor_velocity*delta)
+		move_and_slide()
 	
 	on_air_time += delta
 

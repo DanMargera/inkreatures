@@ -1,17 +1,17 @@
 [gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Stages/powerup/powerup.gd" type="Script" id=1]
-[ext_resource path="res://assets/images/icone_ghost.png" type="Texture" id=2]
-[ext_resource path="res://assets/images/powerup_particle.png" type="Texture" id=3]
+[ext_resource path="res://assets/images/icone_ghost.png" type="Texture2D" id=2]
+[ext_resource path="res://assets/images/powerup_particle.png" type="Texture2D" id=3]
 [ext_resource path="res://Stages/powerup/powerup_particles.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 13, 13 )
 
 [sub_resource type="Gradient" id=3]
-colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0.223922 )
+colors = PackedColorArray( 1, 1, 1, 1, 1, 1, 1, 0.223922 )
 
-[sub_resource type="GradientTexture" id=4]
+[sub_resource type="GradientTexture2D" id=4]
 gradient = SubResource( 3 )
 
 [sub_resource type="Curve" id=5]
@@ -20,7 +20,7 @@ _data = [ Vector2( 0, 0.915909 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.1375 ), 0.0, 0.0
 [sub_resource type="CurveTexture" id=6]
 curve = SubResource( 5 )
 
-[sub_resource type="ParticlesMaterial" id=2]
+[sub_resource type="ParticleProcessMaterial" id=2]
 emission_shape = 1
 emission_sphere_radius = 9.0
 flag_disable_z = true
@@ -42,10 +42,10 @@ collision_mask = 3
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource( 2 )
 
-[node name="Particles2D" type="Particles2D" parent="."]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 amount = 9
 process_material = SubResource( 2 )
 texture = ExtResource( 3 )
