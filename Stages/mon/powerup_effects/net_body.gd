@@ -35,19 +35,19 @@ func _physics_process(delta):
 		# print(get_collider_metadata())
 		
 		# Ran against something, is it the floor? Get normal and angle
-		var n = collision.normal
+		var n = collision.get_normal()
 		var angle = rad_to_deg(acos(n.dot(Vector2(0, -1))))
 		
-		if (collision.collider.is_in_group("players")):
-			emit_signal("catch", collision.collider)
-			if (collision.collider != owner_mon):
-				collision.collider.net()
+		if (collision.get_collider().is_in_group("players")):
+			emit_signal("catch", collision.get_collider())
+			if (collision.get_collider() != owner_mon):
+				collision.get_collider().net()
 		
 		if (angle < FLOOR_ANGLE_TOLERANCE):
 			# If angle to the "up" vectors is < angle tolerance
 			# char is on floor
 			on_air_time = 0
-			floor_velocity = collision.collider_velocity
+			floor_velocity = collision.get_collider_velocity()
 	
 	if (floor_velocity != Vector2()):
 		# If floor moves, move with floor. Use a temporary velocity so the

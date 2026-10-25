@@ -159,20 +159,20 @@ func _physics_process(delta):
 		# print(get_collider_metadata())
 
 		# Ran against something, is it the floor? Get normal and angle
-		var n = collision.normal
+		var n = collision.get_normal()
 		var angle = rad_to_deg(acos(n.dot(Vector2(0, -1))))
 
-		if (collision.collider.is_in_group("players")): # Player collision
-			if (isAlive and collision.collider.isAlive):
-				emit_signal("player_collision", self, collision.collider)
-				if (angle > 180-KILL_ANGLE_THRESHOLD or collision.collider.is_in_group("death_colliders")):
-					killed_by_player(collision.collider)
+		if (collision.get_collider().is_in_group("players")): # Player collision
+			if (isAlive and collision.get_collider().isAlive):
+				emit_signal("player_collision", self, collision.get_collider())
+				if (angle > 180-KILL_ANGLE_THRESHOLD or collision.get_collider().is_in_group("death_colliders")):
+					killed_by_player(collision.get_collider())
 				if (angle < KILL_ANGLE_THRESHOLD or self.is_in_group("death_colliders")):
-					collision.collider.killed_by_player(self)
-		elif (collision.collider.is_in_group("dynamic")):
+					collision.get_collider().killed_by_player(self)
+		elif (collision.get_collider().is_in_group("dynamic")):
 			if (isAlive):
-				collision.collider.interact(self)
-		elif (collision.collider.is_in_group("death_colliders")):
+				collision.get_collider().interact(self)
+		elif (collision.get_collider().is_in_group("death_colliders")):
 			if (isAlive):
 				die()
 
@@ -180,7 +180,7 @@ func _physics_process(delta):
 			# If angle to the "up" vectors is < angle tolerance
 			# char is on floor
 			on_air_time = 0
-			floor_velocity = collision.collider_velocity
+			floor_velocity = collision.get_collider_velocity()
 		elif (angle < 180-KILL_ANGLE_THRESHOLD and not wall_jump):
 			# If angle is in between floor and kill threshold
 			# character has hit a wall
@@ -203,7 +203,7 @@ func _physics_process(delta):
 		#else:
 		# Then move again
 		if (not frozen):
-			velocity = velocity.bounce(collision.normal)
+			velocity = velocity.bounce(collision.get_normal())
 			if (not isAlive):
 				velocity = velocity * 0.35
 

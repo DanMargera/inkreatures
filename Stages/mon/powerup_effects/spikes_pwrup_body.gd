@@ -10,11 +10,11 @@ func _physics_process(delta):
 	var floor_velocity = Vector2()
 	if (collision):
 		# Ran against something, is it the floor? Get normal and angle
-		var n = collision.normal
+		var n = collision.get_normal()
 		var angle = rad_to_deg(acos(n.dot(Vector2(0, -1))))
 		# Check if collision is vertical/floor
 		if (angle < 0.4):
-			floor_velocity = collision.collider_velocity
+			floor_velocity = collision.get_collider_velocity()
 			velocity.x = 0
 			velocity.y = 0
 	if (floor_velocity != Vector2()):
