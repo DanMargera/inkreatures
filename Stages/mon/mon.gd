@@ -30,7 +30,6 @@ const SLIDE_STOP_MIN_TRAVEL = 1.0 # One pixel
 @onready var initial_scale = scale
 var spawn_point
 
-var velocity = Vector2()
 var on_air_time = 100
 
 # Timer in seconds that keeps the player on ground when grounded is true
@@ -209,9 +208,12 @@ func _physics_process(delta):
 				velocity = velocity * 0.35
 
 	if (floor_velocity != Vector2()):
-		# If floor moves, move with floor
-		set_velocity(floor_velocity*delta)
+		# If floor moves, move with floor. Use a temporary velocity so the
+		# body's own velocity (the CharacterBody2D property) is preserved.
+		var own_velocity = velocity
+		velocity = floor_velocity*delta
 		move_and_slide()
+		velocity = own_velocity
 	
 	if (isAlive):
 		if (on_air_time == 0): # This means a surface(ground) collision

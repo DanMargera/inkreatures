@@ -9,7 +9,6 @@ const FLOOR_ANGLE_TOLERANCE = 40
 const SLIDE_STOP_VELOCITY = 1.0 # One pixel per second
 const SLIDE_STOP_MIN_TRAVEL = 1.0 # One pixel
 
-var velocity = Vector2()
 var on_air_time = 100
 
 var owner_mon
@@ -51,9 +50,12 @@ func _physics_process(delta):
 			floor_velocity = collision.collider_velocity
 	
 	if (floor_velocity != Vector2()):
-		# If floor moves, move with floor
-		set_velocity(floor_velocity*delta)
+		# If floor moves, move with floor. Use a temporary velocity so the
+		# body's own velocity (the CharacterBody2D property) is preserved.
+		var own_velocity = velocity
+		velocity = floor_velocity*delta
 		move_and_slide()
+		velocity = own_velocity
 	
 	on_air_time += delta
 

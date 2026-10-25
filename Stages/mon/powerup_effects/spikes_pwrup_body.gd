@@ -1,7 +1,6 @@
 extends CharacterBody2D
 
 const GRAVITY = 1280.0 # Pixels/second
-var velocity = Vector2()
 
 func _physics_process(delta):
 	var force = Vector2(0, GRAVITY)
@@ -19,9 +18,12 @@ func _physics_process(delta):
 			velocity.x = 0
 			velocity.y = 0
 	if (floor_velocity != Vector2()):
-		# If floor moves, move with floor
-		set_velocity(floor_velocity*delta)
+		# If floor moves, move with floor. Use a temporary velocity so the
+		# body's own velocity (the CharacterBody2D property) is preserved.
+		var own_velocity = velocity
+		velocity = floor_velocity*delta
 		move_and_slide()
+		velocity = own_velocity
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
