@@ -14,8 +14,9 @@ func _ready():
 		get_node(node_name).player = player.number
 		get_node(node_name).controller = "null"
 		var tex = load("res://assets/images/m_0"+var_to_str(player.monster)+"_"+player.color+".png")
-		tex.set_flags(0)
-		get_node(node_name+"/Sprite2D").set_texture(tex)
+		var sprite = get_node(node_name+"/Sprite2D")
+		sprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+		sprite.set_texture(tex)
 		get_node(node_name).set_color(player.color)
 		get_node(node_name).connect("on_kill", Callable(self, "_on_player_kill"))
 		get_node(node_name).connect("on_death", Callable(self, "_on_player_death"))

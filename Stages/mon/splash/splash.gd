@@ -14,6 +14,7 @@ func _ready():
 	# Randomize texture
 	var i = randi()%3+1
 	var tex = load("res://assets/images/splash"+var_to_str(i)+".png")
-	tex.set_flags(0)
-	get_node("Node2D/Splash").set_texture(tex)
+	var splash = get_node("Node2D/Splash")
+	splash.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	splash.set_texture(tex)
 	get_node("Node2D/AnimationPlayer").play("Spread")
