@@ -25,6 +25,7 @@
 [ext_resource path="res://assets/images/net_temp_icon.png" type="Texture2D" id=23]
 [ext_resource path="res://assets/images/bombermon_overhead_icon.png" type="Texture2D" id=24]
 [ext_resource path="res://Stages/mon/powerup_effects/vials.gd" type="Script" id=25]
+[ext_resource path="res://assets/images/freeze.png" type="Texture2D" id=26]
 
 [sub_resource type="Gradient" id=23]
 colors = PackedColorArray( 1, 1, 1, 0.207843, 1, 1, 1, 0 )
@@ -609,10 +610,6 @@ damping_curve = SubResource( 32 )
 scale = 0.12
 color_ramp = SubResource( 34 )
 
-[sub_resource type="CompressedTexture2D" id=35]
-flags = 4
-load_path = "res://.import/freeze.png-e2594f8220102b0a1584e71d73abc928.stex"
-
 [sub_resource type="CircleShape2D" id=19]
 radius = 86.5171
 
@@ -793,7 +790,7 @@ speed_scale = 2.0
 explosiveness = 1.0
 local_coords = false
 process_material = SubResource( 30 )
-texture = SubResource( 35 )
+texture = ExtResource( 26 )
 
 [node name="Sprite2D" type="Sprite2D" parent="PowerupEffects/Freeze"]
 visible = false

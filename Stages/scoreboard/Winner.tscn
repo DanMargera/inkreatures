@@ -3,10 +3,7 @@
 [ext_resource path="res://Stages/scoreboard/winner.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/winner_tmp.png" type="Texture2D" id=2]
 [ext_resource path="res://Stages/mon/Mon.tscn" type="PackedScene" id=3]
-
-[sub_resource type="CompressedTexture2D" id=1]
-flags = 4
-load_path = "res://.import/background_menu.png-57c1aa95fba35088cb3f96352a158387.stex"
+[ext_resource path="res://assets/gfx/background_menu.png" type="Texture2D" id=4]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 1025, 32 )
@@ -20,7 +17,7 @@ offset_top = 200.0
 offset_right = 2069.0
 offset_bottom = 681.0
 scale = Vector2( 0.5, 0.5 )
-texture = SubResource( 1 )
+texture = ExtResource( 4 )
 stretch_mode = 2
 
 [node name="Floor" type="StaticBody2D" parent="background"]
