@@ -798,7 +798,7 @@ one_shot = true
 
 [node name="Area2D" type="Area2D" parent="PowerupEffects/Freeze"]
 visible = false
-collision_mask = 2
+collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PowerupEffects/Freeze/Area2D"]
 shape = SubResource( 19 )
@@ -897,7 +897,7 @@ wait_time = 5.0
 one_shot = true
 
 [node name="Area2D" type="Area2D" parent="PowerupEffects/Bombermon"]
-collision_mask = 2
+collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PowerupEffects/Bombermon/Area2D"]
 visible = false
@@ -932,7 +932,7 @@ one_shot = true
 
 [node name="Area2D" type="Area2D" parent="PowerupEffects/Unicorn"]
 visible = false
-collision_mask = 2
+collision_mask = 6
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PowerupEffects/Unicorn/Area2D"]
 position = Vector2( 9, -10 )

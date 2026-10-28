@@ -4,7 +4,7 @@
 [ext_resource path="res://Stages/mon/powerup_effects/spikes_pwrup_body.gd" type="Script" id=2]
 
 [node name="SpikesBodyKinematic2D" type="CharacterBody2D" groups=["death_colliders"]]
-collision_mask = 3
+collision_mask = 7
 script = ExtResource( 2 )
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
