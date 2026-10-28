@@ -285,7 +285,7 @@ func _physics_process(delta):
 			velocity.x = 0
 			velocity.y = 0
 			if (get_node("AnimationPlayer").is_playing()):
-				get_node("AnimationPlayer").stop()
+				get_node("AnimationPlayer").stop(true)
 
 
 func killed_by_player(killer):
@@ -325,7 +325,7 @@ func remove_powerup():
 
 func freeze():
 	frozen = true
-	get_node("AnimationPlayer").stop(false)
+	get_node("AnimationPlayer").pause()
 	get_node("PowerupEffects/PowerupAnimations").play("Freeze")
 
 func unfreeze():

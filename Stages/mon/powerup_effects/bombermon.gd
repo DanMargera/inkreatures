@@ -26,7 +26,7 @@ func on_collision(player1, player2):
 	mon.disconnect("player_collision", Callable(self, "on_collision"))
 	var powerup_animations = get_parent().get_node("PowerupAnimations")
 	if (powerup_animations.get_current_animation() == "BombermonAcquire"):
-		powerup_animations.stop()
+		powerup_animations.stop(true)
 	display_overhead_icon(false)
 	var bombermon = tagged.get_node("PowerupEffects").get_node("Bombermon")
 	bombermon.tag_player(tagged, get_node("DurationTimer").get_time_left())
