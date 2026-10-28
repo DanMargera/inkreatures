@@ -340,6 +340,7 @@ func net(): # Catched by a Net thrown by another player
 func _ready():
 	splash_scene = load("res://Stages/mon/splash/Splash.tscn")
 	get_node("AnimationPlayer").play("RESET")
+	get_node("AnimationPlayer").advance(0)
 	get_node("PowerupEffects/PowerupAnimations").play("RESET")
 	facing_left = false
 	prev_facing_left = false
