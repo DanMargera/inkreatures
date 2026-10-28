@@ -303,3 +303,5 @@ common/enable_pause_aware_picking=true
 
 environment/defaults/default_environment="res://default_env.tres"
 quality/filters/anisotropic_filter_level=1
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
