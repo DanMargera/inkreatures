@@ -31,7 +31,7 @@ shape = SubResource( 2 )
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2( 532, 334 )
 texture = ExtResource( 2 )
-energy = 3.0
+energy = 6.3
 mode = 2
 
 [node name="player" parent="." instance=ExtResource( 3 )]

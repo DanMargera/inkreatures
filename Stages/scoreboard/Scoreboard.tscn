@@ -61,7 +61,7 @@ scale = Vector2( 2, 2 )
 texture = ExtResource( 1 )
 texture_scale = 0.8
 color = Color( 1, 0.505882, 0.505882, 1 )
-energy = 2.2
+energy = 4.6
 
 [node name="Spotlight2" type="PointLight2D" parent="B3"]
 visible = false
@@ -70,7 +70,7 @@ scale = Vector2( 2, 2 )
 texture = ExtResource( 1 )
 texture_scale = 0.8
 color = Color( 1, 0.505882, 0.505882, 1 )
-energy = 2.2
+energy = 4.6
 
 [node name="Spotlight3" type="PointLight2D" parent="B3"]
 visible = false
@@ -79,7 +79,7 @@ scale = Vector2( 2, 2 )
 texture = ExtResource( 1 )
 texture_scale = 0.8
 color = Color( 1, 0.505882, 0.505882, 1 )
-energy = 2.2
+energy = 4.6
 
 [node name="Spotlight4" type="PointLight2D" parent="B3"]
 visible = false
@@ -88,7 +88,7 @@ scale = Vector2( 2, 2 )
 texture = ExtResource( 1 )
 texture_scale = 0.8
 color = Color( 1, 0.505882, 0.505882, 1 )
-energy = 2.2
+energy = 4.6
 
 [node name="Floor" type="StaticBody2D" parent="B3"]
 position = Vector2( 0, 416 )
