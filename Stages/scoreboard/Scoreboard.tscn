@@ -13,12 +13,13 @@ extents = Vector2( 1025, 32 )
 script = ExtResource( 4 )
 
 [node name="B1" type="TextureRect" parent="."]
+texture_repeat = 2
 offset_top = 400.0
 offset_right = 2050.0
 offset_bottom = 880.0
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
-stretch_mode = 2
+stretch_mode = 1
 
 [node name="Floor" type="StaticBody2D" parent="B1"]
 position = Vector2( 0, 416 )
@@ -28,12 +29,13 @@ position = Vector2( 1025, 32 )
 shape = SubResource( 3 )
 
 [node name="B2" type="TextureRect" parent="."]
+texture_repeat = 2
 offset_top = 170.0
 offset_right = 2050.0
 offset_bottom = 650.0
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
-stretch_mode = 2
+stretch_mode = 1
 
 [node name="Floor" type="StaticBody2D" parent="B2"]
 position = Vector2( 0, 416 )
@@ -44,12 +46,13 @@ shape = SubResource( 3 )
 
 [node name="B3" type="TextureRect" parent="."]
 modulate = Color( 0.227451, 0.14902, 0.14902, 1 )
+texture_repeat = 2
 offset_top = -60.0
 offset_right = 2050.0
 offset_bottom = 421.0
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 5 )
-stretch_mode = 2
+stretch_mode = 1
 
 [node name="Spotlight1" type="PointLight2D" parent="B3"]
 visible = false
