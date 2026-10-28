@@ -19,6 +19,7 @@ __meta__ = {
 
 [node name="StartText" type="Label" parent="."]
 visible = false
+texture_filter = 1
 offset_top = 128.0
 offset_right = 512.0
 offset_bottom = 192.0
@@ -26,8 +27,8 @@ scale = Vector2( 2, 2 )
 size_flags_horizontal = 2
 size_flags_vertical = 0
 theme_override_colors/font_color = Color( 0, 0, 0, 1 )
-theme_override_colors/font_shadow_color = Color( 1, 1, 1, 1 )
-theme_override_constants/shadow_outline_size = 1
+theme_override_colors/font_outline_color = Color( 1, 1, 1, 1 )
+theme_override_constants/outline_size = 2
 theme_override_fonts/font = ExtResource( 3 )
 text = "Press Start to Play"
 align = 1
