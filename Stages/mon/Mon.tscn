@@ -38,8 +38,6 @@ flag_disable_z = true
 direction = Vector3( 0, 0, 0 )
 spread = 0.0
 gravity = Vector3( 0, 0, 0 )
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
 color_ramp = SubResource( 22 )
 
 [sub_resource type="Animation" id=3]
@@ -192,12 +190,10 @@ flag_disable_z = true
 direction = Vector3( 0, -1, 0 )
 spread = 180.0
 gravity = Vector3( 0, 650, 0 )
-initial_velocity = 180.0
-initial_velocity_random = 0.53
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-angle = 19.6
-angle_random = 0.6
+initial_velocity_min = 84.6
+initial_velocity_max = 180.0
+angle_min = 7.84
+angle_max = 19.6
 
 [sub_resource type="Animation" id=8]
 length = 0.1
@@ -602,12 +598,11 @@ lifetime_randomness = 0.15
 flag_disable_z = true
 spread = 180.0
 gravity = Vector3( 0, 0, 0 )
-initial_velocity = 330.0
-initial_velocity_random = 0.43
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
+initial_velocity_min = 188.1
+initial_velocity_max = 330.0
 damping_curve = SubResource( 32 )
-scale = 0.12
+scale_min = 0.12
+scale_max = 0.12
 color_ramp = SubResource( 34 )
 
 [sub_resource type="CircleShape2D" id=19]
@@ -631,10 +626,10 @@ flag_disable_z = true
 direction = Vector3( 0, 1, 0 )
 spread = 3.0
 gravity = Vector3( 0, 98, 0 )
-initial_velocity = 100.0
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-damping = 1.0
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+damping_min = 1.0
+damping_max = 1.0
 scale_curve = SubResource( 28 )
 color_ramp = SubResource( 26 )
 
@@ -656,11 +651,10 @@ lifetime_randomness = 0.5
 flag_disable_z = true
 spread = 180.0
 gravity = Vector3( 0, 0, 0 )
-initial_velocity = 500.0
-initial_velocity_random = 0.7
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-scale = 4.0
+initial_velocity_min = 150.0
+initial_velocity_max = 500.0
+scale_min = 4.0
+scale_max = 4.0
 scale_curve = SubResource( 40 )
 color_ramp = SubResource( 38 )
 
@@ -709,10 +703,10 @@ flag_disable_z = true
 direction = Vector3( 0.5, -1, 0 )
 spread = 120.0
 gravity = Vector3( 0, 98, 0 )
-initial_velocity = 60.0
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-scale = 0.8
+initial_velocity_min = 60.0
+initial_velocity_max = 60.0
+scale_min = 0.8
+scale_max = 0.8
 color_ramp = SubResource( 51 )
 
 [node name="Mon" type="CharacterBody2D" groups=["players"]]

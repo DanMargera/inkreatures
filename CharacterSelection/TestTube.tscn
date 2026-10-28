@@ -25,9 +25,8 @@ flag_disable_z = true
 direction = Vector3( 0, -1, 0 )
 spread = 5.0
 gravity = Vector3( 0, 0, 0 )
-initial_velocity = 30.0
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
+initial_velocity_min = 30.0
+initial_velocity_max = 30.0
 
 [sub_resource type="Animation" id=1]
 length = 0.01
