@@ -34,7 +34,7 @@ colors = PackedColorArray( 1, 1, 1, 0.207843, 1, 1, 1, 0 )
 gradient = SubResource( 23 )
 
 [sub_resource type="ParticleProcessMaterial" id=21]
-flag_disable_z = true
+particle_flag_disable_z = true
 direction = Vector3( 0, 0, 0 )
 spread = 0.0
 gravity = Vector3( 0, 0, 0 )
@@ -186,7 +186,7 @@ tracks/0/keys = {
 radius = 14.8666
 
 [sub_resource type="ParticleProcessMaterial" id=20]
-flag_disable_z = true
+particle_flag_disable_z = true
 direction = Vector3( 0, -1, 0 )
 spread = 180.0
 gravity = Vector3( 0, 650, 0 )
@@ -595,7 +595,7 @@ curve = SubResource( 31 )
 
 [sub_resource type="ParticleProcessMaterial" id=30]
 lifetime_randomness = 0.15
-flag_disable_z = true
+particle_flag_disable_z = true
 spread = 180.0
 gravity = Vector3( 0, 0, 0 )
 initial_velocity_min = 188.1
@@ -622,7 +622,7 @@ _data = [ Vector2( 0, 3 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 curve = SubResource( 27 )
 
 [sub_resource type="ParticleProcessMaterial" id=24]
-flag_disable_z = true
+particle_flag_disable_z = true
 direction = Vector3( 0, 1, 0 )
 spread = 3.0
 gravity = Vector3( 0, 98, 0 )
@@ -648,7 +648,7 @@ curve = SubResource( 39 )
 
 [sub_resource type="ParticleProcessMaterial" id=36]
 lifetime_randomness = 0.5
-flag_disable_z = true
+particle_flag_disable_z = true
 spread = 180.0
 gravity = Vector3( 0, 0, 0 )
 initial_velocity_min = 150.0
@@ -699,7 +699,7 @@ colors = PackedColorArray( 1, 1, 1, 1, 1, 0.615234, 0, 1, 1, 0.380392, 0, 0.2431
 gradient = SubResource( 50 )
 
 [sub_resource type="ParticleProcessMaterial" id=49]
-flag_disable_z = true
+particle_flag_disable_z = true
 direction = Vector3( 0.5, -1, 0 )
 spread = 120.0
 gravity = Vector3( 0, 98, 0 )
