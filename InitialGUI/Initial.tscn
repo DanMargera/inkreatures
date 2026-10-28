@@ -28,7 +28,7 @@ offset_bottom = 418.0
 offset_right = 1024.0
 offset_bottom = 70.0
 texture = ExtResource( 3 )
-stretch_mode = 4
+stretch_mode = 3
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="."]
 offset_top = 395.0

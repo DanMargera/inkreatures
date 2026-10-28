@@ -25,7 +25,7 @@ offset_bottom = -330.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 texture = ExtResource( 3 )
-stretch_mode = 6
+stretch_mode = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 offset_top = 175.0
@@ -37,7 +37,7 @@ theme_override_constants/separation = 100
 offset_right = 1024.0
 offset_bottom = 70.0
 texture = ExtResource( 4 )
-stretch_mode = 4
+stretch_mode = 3
 
 [node name="container" type="VBoxContainer" parent="."]
 offset_left = 453.0
