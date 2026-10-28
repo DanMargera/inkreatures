@@ -8,8 +8,8 @@ func effect(player):
 	player.remove_powerup()
 	# Set opacity to 50% with this (wtf godot):
 	get_parent().get_parent().get_node("Sprite2D").self_modulate.a = 0.5
-	get_parent().get_parent().set_collision_mask_value(1, false)
-	get_parent().get_parent().set_collision_layer_value(1, false)
+	get_parent().get_parent().set_collision_mask_value(2, false)
+	get_parent().get_parent().set_collision_layer_value(2, false)
 	# Not sure what do do with this:
 	#get_parent().get_parent().set_layer_mask(2)
 	get_node("DurationTimer").start()
@@ -17,8 +17,8 @@ func effect(player):
 func effect_finish():
 	# Reset opacity to 100%
 	get_parent().get_parent().get_node("Sprite2D").self_modulate.a = 1
-	get_parent().get_parent().set_collision_mask_value(1, true)
-	get_parent().get_parent().set_collision_layer_value(1, true)
+	get_parent().get_parent().set_collision_mask_value(2, true)
+	get_parent().get_parent().set_collision_layer_value(2, true)
 	get_node("DurationTimer").stop()
 	#get_parent().get_parent().set_layer_mask(1)
 	# No more triggers in 3.0, need to use Area2D ?
