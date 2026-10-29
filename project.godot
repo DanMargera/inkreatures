@@ -29,10 +29,6 @@ window/stretch/mode="viewport"
 
 enabled=PackedStringArray()
 
-[gui]
-
-common/drop_mouse_on_gui_input_disabled=true
-
 [input]
 
 ui_accept={
@@ -307,13 +303,8 @@ dev3_cancel={
 ]
 }
 
-[physics]
-
-common/enable_pause_aware_picking=true
-
 [rendering]
 
 environment/defaults/default_environment="res://default_env.tres"
-quality/filters/anisotropic_filter_level=1
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
