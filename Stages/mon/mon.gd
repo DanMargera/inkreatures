@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
 var GRAVITY = 1280.0 # Pixels/second
 
@@ -27,10 +27,9 @@ const DEATH_ANIMATION_TIME = 1
 const SLIDE_STOP_VELOCITY = 1.0 # One pixel per second
 const SLIDE_STOP_MIN_TRAVEL = 1.0 # One pixel
 
-onready var initial_scale = scale
+@onready var initial_scale = scale
 var spawn_point
 
-var velocity = Vector2()
 var on_air_time = 100
 
 # Timer in seconds that keeps the player on ground when grounded is true
@@ -160,20 +159,20 @@ func _physics_process(delta):
 		# print(get_collider_metadata())
 
 		# Ran against something, is it the floor? Get normal and angle
-		var n = collision.normal
-		var angle = rad2deg(acos(n.dot(Vector2(0, -1))))
+		var n = collision.get_normal()
+		var angle = rad_to_deg(acos(n.dot(Vector2(0, -1))))
 
-		if (collision.collider.is_in_group("players")): # Player collision
-			if (isAlive and collision.collider.isAlive):
-				emit_signal("player_collision", self, collision.collider)
-				if (angle > 180-KILL_ANGLE_THRESHOLD or collision.collider.is_in_group("death_colliders")):
-					killed_by_player(collision.collider)
+		if (collision.get_collider().is_in_group("players")): # Player collision
+			if (isAlive and collision.get_collider().isAlive):
+				emit_signal("player_collision", self, collision.get_collider())
+				if (angle > 180-KILL_ANGLE_THRESHOLD or collision.get_collider().is_in_group("death_colliders")):
+					killed_by_player(collision.get_collider())
 				if (angle < KILL_ANGLE_THRESHOLD or self.is_in_group("death_colliders")):
-					collision.collider.killed_by_player(self)
-		elif (collision.collider.is_in_group("dynamic")):
+					collision.get_collider().killed_by_player(self)
+		elif (collision.get_collider().is_in_group("dynamic")):
 			if (isAlive):
-				collision.collider.interact(self)
-		elif (collision.collider.is_in_group("death_colliders")):
+				collision.get_collider().interact(self)
+		elif (collision.get_collider().is_in_group("death_colliders")):
 			if (isAlive):
 				die()
 
@@ -181,7 +180,7 @@ func _physics_process(delta):
 			# If angle to the "up" vectors is < angle tolerance
 			# char is on floor
 			on_air_time = 0
-			floor_velocity = collision.collider_velocity
+			floor_velocity = collision.get_collider_velocity()
 		elif (angle < 180-KILL_ANGLE_THRESHOLD and not wall_jump):
 			# If angle is in between floor and kill threshold
 			# character has hit a wall
@@ -204,13 +203,17 @@ func _physics_process(delta):
 		#else:
 		# Then move again
 		if (not frozen):
-			velocity = velocity.bounce(collision.normal)
+			velocity = velocity.bounce(collision.get_normal())
 			if (not isAlive):
 				velocity = velocity * 0.35
 
 	if (floor_velocity != Vector2()):
-		# If floor moves, move with floor
-		move_and_slide(floor_velocity*delta)
+		# If floor moves, move with floor. Use a temporary velocity so the
+		# body's own velocity (the CharacterBody2D property) is preserved.
+		var own_velocity = velocity
+		velocity = floor_velocity*delta
+		move_and_slide()
+		velocity = own_velocity
 	
 	if (isAlive):
 		if (on_air_time == 0): # This means a surface(ground) collision
@@ -282,7 +285,7 @@ func _physics_process(delta):
 			velocity.x = 0
 			velocity.y = 0
 			if (get_node("AnimationPlayer").is_playing()):
-				get_node("AnimationPlayer").stop()
+				get_node("AnimationPlayer").stop(true)
 
 
 func killed_by_player(killer):
@@ -298,7 +301,7 @@ func die():
 		emit_signal("on_death", self.player)
 
 func ink_splash(): # Generates an ink splash where player stands
-	var splash = splash_scene.instance()
+	var splash = splash_scene.instantiate()
 	splash.set_position(self.position)
 	splash.setup(color, abs(scale.y))
 	get_parent().add_child(splash)
@@ -322,7 +325,7 @@ func remove_powerup():
 
 func freeze():
 	frozen = true
-	get_node("AnimationPlayer").stop(false)
+	get_node("AnimationPlayer").pause()
 	get_node("PowerupEffects/PowerupAnimations").play("Freeze")
 
 func unfreeze():
@@ -337,6 +340,7 @@ func net(): # Catched by a Net thrown by another player
 func _ready():
 	splash_scene = load("res://Stages/mon/splash/Splash.tscn")
 	get_node("AnimationPlayer").play("RESET")
+	get_node("AnimationPlayer").advance(0)
 	get_node("PowerupEffects/PowerupAnimations").play("RESET")
 	facing_left = false
 	prev_facing_left = false

@@ -1,33 +1,32 @@
 [gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://CharacterSelection/test_tube.gd" type="Script" id=1]
-[ext_resource path="res://assets/gfx/fundo_selecao.png" type="Texture" id=2]
-[ext_resource path="res://assets/images/spriteparticulaamarela.png" type="Texture" id=3]
-[ext_resource path="res://assets/gfx/join.png" type="Texture" id=4]
-[ext_resource path="res://assets/images/m_01_amarelo.png" type="Texture" id=5]
-[ext_resource path="res://assets/gfx/ready_amarelo.png" type="Texture" id=6]
-[ext_resource path="res://assets/gfx/ready_azul.png" type="Texture" id=7]
-[ext_resource path="res://assets/gfx/ready_verde.png" type="Texture" id=8]
-[ext_resource path="res://assets/gfx/ready_vermelho.png" type="Texture" id=9]
-[ext_resource path="res://assets/gfx/select_amarelo.png" type="Texture" id=10]
-[ext_resource path="res://assets/gfx/select_azul.png" type="Texture" id=11]
-[ext_resource path="res://assets/images/spriteparticulaazul.png" type="Texture" id=12]
-[ext_resource path="res://assets/gfx/select_verde.png" type="Texture" id=13]
-[ext_resource path="res://assets/images/spriteparticulaverde.png" type="Texture" id=14]
-[ext_resource path="res://assets/gfx/select_vermelho.png" type="Texture" id=15]
-[ext_resource path="res://assets/images/spriteparticulavermelha.png" type="Texture" id=16]
-[ext_resource path="res://assets/gfx/p1.png" type="Texture" id=17]
+[ext_resource path="res://assets/gfx/fundo_selecao.png" type="Texture2D" id=2]
+[ext_resource path="res://assets/images/spriteparticulaamarela.png" type="Texture2D" id=3]
+[ext_resource path="res://assets/gfx/join.png" type="Texture2D" id=4]
+[ext_resource path="res://assets/images/m_01_amarelo.png" type="Texture2D" id=5]
+[ext_resource path="res://assets/gfx/ready_amarelo.png" type="Texture2D" id=6]
+[ext_resource path="res://assets/gfx/ready_azul.png" type="Texture2D" id=7]
+[ext_resource path="res://assets/gfx/ready_verde.png" type="Texture2D" id=8]
+[ext_resource path="res://assets/gfx/ready_vermelho.png" type="Texture2D" id=9]
+[ext_resource path="res://assets/gfx/select_amarelo.png" type="Texture2D" id=10]
+[ext_resource path="res://assets/gfx/select_azul.png" type="Texture2D" id=11]
+[ext_resource path="res://assets/images/spriteparticulaazul.png" type="Texture2D" id=12]
+[ext_resource path="res://assets/gfx/select_verde.png" type="Texture2D" id=13]
+[ext_resource path="res://assets/images/spriteparticulaverde.png" type="Texture2D" id=14]
+[ext_resource path="res://assets/gfx/select_vermelho.png" type="Texture2D" id=15]
+[ext_resource path="res://assets/images/spriteparticulavermelha.png" type="Texture2D" id=16]
+[ext_resource path="res://assets/gfx/p1.png" type="Texture2D" id=17]
 
-[sub_resource type="ParticlesMaterial" id=10]
-emission_shape = 2
+[sub_resource type="ParticleProcessMaterial" id=10]
+emission_shape = 3
 emission_box_extents = Vector3( 60, 1, 1 )
-flag_disable_z = true
+particle_flag_disable_z = true
 direction = Vector3( 0, -1, 0 )
 spread = 5.0
 gravity = Vector3( 0, 0, 0 )
-initial_velocity = 30.0
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
+initial_velocity_min = 30.0
+initial_velocity_max = 30.0
 
 [sub_resource type="Animation" id=1]
 length = 0.01
@@ -38,20 +37,20 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ ExtResource( 4 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Particles2D:visible")
+tracks/1/path = NodePath("GPUParticles2D:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ false ]
 }
@@ -65,20 +64,20 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ ExtResource( 6 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Particles2D:visible")
+tracks/1/path = NodePath("GPUParticles2D:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ false ]
 }
@@ -92,20 +91,20 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ ExtResource( 7 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Particles2D:visible")
+tracks/1/path = NodePath("GPUParticles2D:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ false ]
 }
@@ -119,20 +118,20 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ ExtResource( 8 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Particles2D:visible")
+tracks/1/path = NodePath("GPUParticles2D:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ false ]
 }
@@ -146,20 +145,20 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ ExtResource( 9 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Particles2D:visible")
+tracks/1/path = NodePath("GPUParticles2D:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ false ]
 }
@@ -173,32 +172,32 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ ExtResource( 10 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Particles2D:visible")
+tracks/1/path = NodePath("GPUParticles2D:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ true ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Particles2D:texture")
+tracks/2/path = NodePath("GPUParticles2D:texture")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ ExtResource( 3 ) ]
 }
@@ -212,32 +211,32 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ ExtResource( 11 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Particles2D:visible")
+tracks/1/path = NodePath("GPUParticles2D:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ true ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Particles2D:texture")
+tracks/2/path = NodePath("GPUParticles2D:texture")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ ExtResource( 12 ) ]
 }
@@ -251,32 +250,32 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ ExtResource( 13 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Particles2D:visible")
+tracks/1/path = NodePath("GPUParticles2D:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ true ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Particles2D:texture")
+tracks/2/path = NodePath("GPUParticles2D:texture")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ ExtResource( 14 ) ]
 }
@@ -290,32 +289,32 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ ExtResource( 15 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Particles2D:visible")
+tracks/1/path = NodePath("GPUParticles2D:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ true ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Particles2D:texture")
+tracks/2/path = NodePath("GPUParticles2D:texture")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
 "update": 1,
 "values": [ ExtResource( 16 ) ]
 }
@@ -324,24 +323,26 @@ tracks/2/keys = {
 script = ExtResource( 1 )
 
 [node name="TubeBG" type="TextureRect" parent="."]
-margin_left = -69.0
-margin_top = -89.0
-margin_right = 69.0
-margin_bottom = 131.0
+offset_left = -69.0
+offset_top = -89.0
+offset_right = 69.0
+offset_bottom = 131.0
 texture = ExtResource( 2 )
 
-[node name="Particles2D" type="Particles2D" parent="."]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 visible = false
 position = Vector2( 0, 128 )
 amount = 32
 lifetime = 7.0
+fixed_fps = 0
+draw_order = 0
 process_material = SubResource( 10 )
 texture = ExtResource( 16 )
 
-[node name="Tube" type="Sprite" parent="."]
+[node name="Tube" type="Sprite2D" parent="."]
 texture = ExtResource( 4 )
 
-[node name="Mon" type="Sprite" parent="Tube"]
+[node name="Mon" type="Sprite2D" parent="Tube"]
 position = Vector2( 0, 13 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 5 )
@@ -359,9 +360,9 @@ anims/Select_verde = SubResource( 8 )
 anims/Select_vermelho = SubResource( 9 )
 
 [node name="PlayerLabel" type="TextureRect" parent="."]
-margin_left = -35.0
-margin_top = -112.0
-margin_right = 33.0
-margin_bottom = -88.0
+offset_left = -35.0
+offset_top = -112.0
+offset_right = 33.0
+offset_bottom = -88.0
 texture = ExtResource( 17 )
 expand = true

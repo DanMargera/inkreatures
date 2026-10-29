@@ -6,7 +6,7 @@ var mon = null
 func effect(player):
 	mon = player
 	player.remove_powerup()
-	var spikes = spikes_scene.instance()
+	var spikes = spikes_scene.instantiate()
 	var spikespos = player.position
 	spikespos.y += 32
 	if (player.facing_left):

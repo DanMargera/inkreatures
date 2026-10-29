@@ -41,7 +41,7 @@ func set_join(join, device, selected_mon, selected_color):
 	if (join):
 		for i in range(connected_players.size()):
 			if (not connected_players[i]):
-				var tube = get_node("Tubes/Tube"+var2str(i+1))
+				var tube = get_node("Tubes/Tube"+var_to_str(i+1))
 				connected_players[i] = ConnectedPlayerInfo.new(device, tube)
 				tube.join(join, selected_mon, selected_color)
 				break
@@ -49,7 +49,7 @@ func set_join(join, device, selected_mon, selected_color):
 		for i in range(connected_players.size()):
 			var pinfo = connected_players[i]
 			if (pinfo and pinfo.device == device):
-				get_node("Tubes/Tube"+var2str(i+1)).join(join, null, null)
+				get_node("Tubes/Tube"+var_to_str(i+1)).join(join, null, null)
 				connected_players[i] = null
 	update_players_ready()
 
@@ -97,7 +97,7 @@ func _ready():
 	var tubes = get_node("Tubes").get_children()
 	var p_num = 1
 	for tube in tubes:
-		var tex = load("res://assets/gfx/p"+var2str(p_num)+".png")
+		var tex = load("res://assets/gfx/p"+var_to_str(p_num)+".png")
 		tube.get_node("PlayerLabel").texture = tex
 		p_num += 1
 	var players = get_node("/root/global").player_list
