@@ -30,7 +30,8 @@
 [sub_resource type="Gradient" id=23]
 colors = PackedColorArray( 1, 1, 1, 0.207843, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture2D" id=22]
+[sub_resource type="GradientTexture1D" id=22]
+width = 2048
 gradient = SubResource( 23 )
 
 [sub_resource type="ParticleProcessMaterial" id=21]
@@ -583,7 +584,8 @@ tracks/0/keys = {
 [sub_resource type="Gradient" id=33]
 colors = PackedColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture2D" id=34]
+[sub_resource type="GradientTexture1D" id=34]
+width = 2048
 gradient = SubResource( 33 )
 
 [sub_resource type="Curve" id=31]
@@ -611,7 +613,8 @@ radius = 86.5171
 [sub_resource type="Gradient" id=25]
 colors = PackedColorArray( 1, 1, 1, 1, 1, 1, 1, 0.756863 )
 
-[sub_resource type="GradientTexture2D" id=26]
+[sub_resource type="GradientTexture1D" id=26]
+width = 2048
 gradient = SubResource( 25 )
 
 [sub_resource type="Curve" id=27]
@@ -637,7 +640,8 @@ color_ramp = SubResource( 26 )
 offsets = PackedFloat32Array( 0, 0.251613, 0.4, 1 )
 colors = PackedColorArray( 1, 0.635742, 0, 1, 0.942871, 0.942871, 0.942871, 1, 0.743652, 0.743652, 0.743652, 1, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture2D" id=38]
+[sub_resource type="GradientTexture1D" id=38]
+width = 2048
 gradient = SubResource( 37 )
 
 [sub_resource type="Curve" id=39]
@@ -695,7 +699,8 @@ animations = [ {
 offsets = PackedFloat32Array( 0, 0.374194, 1 )
 colors = PackedColorArray( 1, 1, 1, 1, 1, 0.615234, 0, 1, 1, 0.380392, 0, 0.243137 )
 
-[sub_resource type="GradientTexture2D" id=51]
+[sub_resource type="GradientTexture1D" id=51]
+width = 2048
 gradient = SubResource( 50 )
 
 [sub_resource type="ParticleProcessMaterial" id=49]

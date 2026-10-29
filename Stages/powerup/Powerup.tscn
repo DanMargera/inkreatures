@@ -11,7 +11,8 @@ extents = Vector2( 13, 13 )
 [sub_resource type="Gradient" id=3]
 colors = PackedColorArray( 1, 1, 1, 1, 1, 1, 1, 0.223922 )
 
-[sub_resource type="GradientTexture2D" id=4]
+[sub_resource type="GradientTexture1D" id=4]
+width = 2048
 gradient = SubResource( 3 )
 
 [sub_resource type="Curve" id=5]
