@@ -44,6 +44,8 @@ texture = ExtResource( 2 )
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 amount = 9
+fixed_fps = 0
+draw_order = 0
 process_material = SubResource( 2 )
 texture = ExtResource( 3 )
 script = ExtResource( 4 )

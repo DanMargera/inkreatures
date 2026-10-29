@@ -334,6 +334,8 @@ visible = false
 position = Vector2( 0, 128 )
 amount = 32
 lifetime = 7.0
+fixed_fps = 0
+draw_order = 0
 process_material = SubResource( 10 )
 texture = ExtResource( 16 )
 

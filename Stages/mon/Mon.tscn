@@ -719,6 +719,8 @@ emitting = false
 amount = 30
 lifetime = 0.18
 local_coords = false
+fixed_fps = 0
+draw_order = 0
 process_material = SubResource( 21 )
 texture = ExtResource( 2 )
 script = ExtResource( 3 )
@@ -748,6 +750,8 @@ lifetime = 2.0
 one_shot = true
 explosiveness = 0.93
 local_coords = false
+fixed_fps = 0
+draw_order = 0
 process_material = SubResource( 20 )
 texture = ExtResource( 5 )
 script = ExtResource( 6 )
@@ -783,6 +787,8 @@ one_shot = true
 speed_scale = 2.0
 explosiveness = 1.0
 local_coords = false
+fixed_fps = 0
+draw_order = 0
 process_material = SubResource( 30 )
 texture = ExtResource( 26 )
 
@@ -812,6 +818,8 @@ emitting = false
 amount = 200
 lifetime = 0.1
 local_coords = false
+fixed_fps = 0
+draw_order = 0
 process_material = SubResource( 24 )
 
 [node name="RightParticles" type="GPUParticles2D" parent="PowerupEffects/Rockets"]
@@ -820,6 +828,8 @@ emitting = false
 amount = 200
 lifetime = 0.1
 local_coords = false
+fixed_fps = 0
+draw_order = 0
 process_material = SubResource( 24 )
 
 [node name="BackSprite" type="Sprite2D" parent="PowerupEffects/Rockets"]
@@ -890,6 +900,8 @@ amount = 60
 one_shot = true
 explosiveness = 1.0
 local_coords = false
+fixed_fps = 0
+draw_order = 0
 process_material = SubResource( 36 )
 
 [node name="DurationTimer" type="Timer" parent="PowerupEffects/Bombermon"]
@@ -913,6 +925,8 @@ visible = false
 position = Vector2( 8, -6 )
 amount = 6
 lifetime = 0.15
+fixed_fps = 0
+draw_order = 0
 process_material = SubResource( 49 )
 
 [node name="Unicorn" type="Node2D" parent="PowerupEffects"]
