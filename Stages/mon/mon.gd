@@ -357,3 +357,5 @@ func front_flip():
 		get_node("PowerupEffects/PowerupAnimations").play("UnicornLeftFlip")
 	else:
 		get_node("PowerupEffects/PowerupAnimations").play("UnicornRightFlip")
+	# Start the flip on this frame, as 3.5 did (4.x only applies play() on the next animation step)
+	get_node("PowerupEffects/PowerupAnimations").advance(0)
