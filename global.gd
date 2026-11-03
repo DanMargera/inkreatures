@@ -27,8 +27,92 @@ class Player:
 	var score = 0
 	var win_count = 0
 
+# Godot 4's Compatibility renderer compiles the process shader of a GPUParticles2D (one per
+# ParticleProcessMaterial feature set) the first time those particles run, and the lit variant of the
+# canvas shader the first time a light masks a sprite. Each compile stalls that frame for about 0.2-0.5 s,
+# which shows as a hitch the first time a powerup, smash or death effect is used in a match.
+# So every particle effect and the ink splash light are run once at boot, in a SubViewport that is never
+# displayed. A compiled particle shader is freed with the last material that uses it, so a deep copy of
+# each process material is kept for the session. The scenes themselves are not kept: scripts change their
+# shared materials at runtime (powerup sparkles, vials trail), and each round must load them fresh.
+const WARM_UP_SCENES = [
+	"res://Stages/mon/Mon.tscn",
+	"res://Stages/powerup/Powerup.tscn",
+	"res://CharacterSelection/TestTube.tscn",
+	"res://Stages/mon/splash/Splash.tscn",
+]
+const WARM_UP_SIZE = Vector2i(64, 64)
+var _warm_up_keep = [] # ParticleProcessMaterial copies, never used by gameplay
+var _warm_up_pending = [] # warm-up nodes not added to the tree yet
+
 func _ready():
-	pass
+	_warm_up_effects()
+
+func _notification(what):
+	if what == NOTIFICATION_PREDELETE: # quit before the warm-up finished
+		for n in _warm_up_pending:
+			n.free()
+
+# Compiles one effect per frame, starting after the first frame is shown, so boot is a few short stalls
+# behind the title screen instead of one long black frame.
+func _warm_up_effects():
+	# process_frame (not frame_post_draw, which never fires headless): nodes added on a process_frame are
+	# drawn, and their shaders compiled, at the end of that same frame.
+	for i in 2: # let the first frame be drawn and shown
+		await get_tree().process_frame
+	var vp = SubViewport.new()
+	vp.size = WARM_UP_SIZE
+	vp.render_target_update_mode = SubViewport.UPDATE_ALWAYS
+	add_child(vp)
+	for path in WARM_UP_SCENES:
+		var steps = _warm_up_steps(path) # each step: nodes added to the viewport together
+		await get_tree().process_frame # loading the scene was this frame's work
+		for step in steps:
+			for n in step:
+				vp.add_child(n)
+				_warm_up_pending.erase(n)
+			await get_tree().process_frame
+	await get_tree().process_frame # the last step's frame has been drawn now
+	vp.queue_free()
+
+func _warm_up_steps(path):
+	var steps = []
+	var scene = load(path)
+	if scene == null:
+		push_warning("Shader warm-up: cannot load " + path)
+		return steps
+	var center = Vector2(WARM_UP_SIZE) / 2
+	var inst = scene.instantiate()
+	for n in inst.find_children("*", "GPUParticles2D", true, false):
+		var p = n.duplicate(0) # no script, signals or groups
+		if p.process_material:
+			p.process_material = p.process_material.duplicate(true) # same shader, not the scene's material
+			_warm_up_keep.append(p.process_material)
+		p.position = center
+		p.one_shot = true
+		p.emitting = true
+		steps.append([p])
+	var lit = []
+	for n in inst.find_children("*", "PointLight2D", true, false):
+		var l = n.duplicate(0)
+		if l.texture == null: # splash.gd assigns the texture in _ready
+			l.texture = load("res://assets/images/splash1.png")
+		l.position = center
+		lit.append(l)
+	if not lit.is_empty():
+		# Sprites under the light, with the default light mask and the one Stage2's TileMap uses
+		# (Splash.tscn only lights light_mask 2), so the lit canvas shader variants compile too.
+		for mask in [1, 2]:
+			var s = Sprite2D.new()
+			s.texture = load("res://icon.png")
+			s.position = center
+			s.light_mask = mask
+			lit.append(s)
+		steps.append(lit)
+	inst.free()
+	for step in steps:
+		_warm_up_pending.append_array(step)
+	return steps
 
 # Called when a player joins the game in the character selection screen
 func add_player(index, color, mon, device):
