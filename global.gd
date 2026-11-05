@@ -18,6 +18,10 @@ var player_list = []
 var selected_stage = 2
 var game_mode = game_modes.SURVIVAL
 
+const LOADING_SCREEN = "res://LoadingScreen/LoadingScreen.tscn"
+var next_stage = "" # the stage the loading screen switches to
+var outgoing_scene = null # the scene game_start() left, kept loaded until the stage has loaded
+
 class Player:
 	var number
 	var color
@@ -127,8 +131,17 @@ func add_player(index, color, mon, device):
 	player.monster = mon
 	player.controller_device = device
 
+# Every stage starts through the loading screen, which then changes to next_stage.
 func game_start():
-	get_tree().change_scene_to_file("res://Stages/Stage"+var_to_str(selected_stage)+".tscn")
+	next_stage = "res://Stages/Stage"+var_to_str(selected_stage)+".tscn"
+	# In 3.5 the stage loaded while the outgoing scene was still alive, so it reused the resources that scene
+	# kept cached: the scoreboard's Mon.tscn, with any shared material a script changed in the last round
+	# (a Vials trail shrink still active when the round ended carries into the next round). Holding the
+	# outgoing PackedScene until the loading screen has loaded the stage keeps that behaviour.
+	var current = get_tree().current_scene
+	if current and not current.scene_file_path.is_empty():
+		outgoing_scene = load(current.scene_file_path)
+	get_tree().change_scene_to_file(LOADING_SCREEN)
 	selected_stage = 1 + randi() % 2
 
 func increase_kill_count(pnum):
