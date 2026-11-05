@@ -35,10 +35,11 @@ class Player:
 # ParticleProcessMaterial feature set) the first time those particles run, and the lit variant of the
 # canvas shader the first time a light masks a sprite. Each compile stalls that frame for about 0.2-0.5 s,
 # which shows as a hitch the first time a powerup, smash or death effect is used in a match.
-# So every particle effect and the ink splash light are run once at boot, in a SubViewport that is never
-# displayed. A compiled particle shader is freed with the last material that uses it, so a deep copy of
-# each process material is kept for the session. The scenes themselves are not kept: scripts change their
-# shared materials at runtime (powerup sparkles, vials trail), and each round must load them fresh.
+# So before the first stage starts, the loading screen runs every particle effect and the ink splash light
+# once, in a SubViewport that is never displayed. A compiled particle shader is freed with the last material
+# that uses it, so a deep copy of each process material is kept for the session, and later stage starts skip
+# the warm-up. The scenes themselves are not kept: scripts change their shared materials at runtime
+# (powerup sparkles, vials trail), and the warm-up must not carry those changes into later rounds.
 const WARM_UP_SCENES = [
 	"res://Stages/mon/Mon.tscn",
 	"res://Stages/powerup/Powerup.tscn",
@@ -46,24 +47,27 @@ const WARM_UP_SCENES = [
 	"res://Stages/mon/splash/Splash.tscn",
 ]
 const WARM_UP_SIZE = Vector2i(64, 64)
+var _warmed_up = false
 var _warm_up_keep = [] # ParticleProcessMaterial copies, never used by gameplay
 var _warm_up_pending = [] # warm-up nodes not added to the tree yet
-
-func _ready():
-	_warm_up_effects()
 
 func _notification(what):
 	if what == NOTIFICATION_PREDELETE: # quit before the warm-up finished
 		for n in _warm_up_pending:
 			n.free()
 
-# Compiles one effect per frame, starting after the first frame is shown, so boot is a few short stalls
-# behind the title screen instead of one long black frame.
+# Awaited by the loading screen. Returns at once if the shaders were already warmed up this session.
+func warm_up_shaders():
+	if _warmed_up:
+		return
+	_warmed_up = true
+	await _warm_up_effects()
+
+# Compiles one effect per frame, so the warm-up is a few short stalls behind the loading screen instead of
+# one long frame.
 func _warm_up_effects():
 	# process_frame (not frame_post_draw, which never fires headless): nodes added on a process_frame are
 	# drawn, and their shaders compiled, at the end of that same frame.
-	for i in 2: # let the first frame be drawn and shown
-		await get_tree().process_frame
 	var vp = SubViewport.new()
 	vp.size = WARM_UP_SIZE
 	vp.render_target_update_mode = SubViewport.UPDATE_ALWAYS
@@ -131,7 +135,7 @@ func add_player(index, color, mon, device):
 	player.monster = mon
 	player.controller_device = device
 
-# Every stage starts through the loading screen, which then changes to next_stage.
+# Every stage starts through the loading screen, which warms up the shaders and then changes to next_stage.
 func game_start():
 	next_stage = "res://Stages/Stage"+var_to_str(selected_stage)+".tscn"
 	# In 3.5 the stage loaded while the outgoing scene was still alive, so it reused the resources that scene
