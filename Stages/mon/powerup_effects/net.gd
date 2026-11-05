@@ -8,13 +8,13 @@ var catched_player
 func effect(player):
 	mon = player
 	player.remove_powerup()
-	net = net_scene.instance()
+	net = net_scene.instantiate()
 	var netpos = player.position
 	netpos.y -= 32
 	net.owner_mon = player
 	net.position = netpos
 	get_parent().get_parent().get_parent().add_child(net)
-	net.connect("catch", self, "on_catch")
+	net.connect("catch", Callable(self, "on_catch"))
 	net.start()
 	get_node("DurationTimer").start()
 
@@ -28,7 +28,7 @@ func on_death(player):
 func on_catch(player):
 	if (mon != player):
 		catched_player = player
-		player.connect("on_death", self, "on_death")
+		player.connect("on_death", Callable(self, "on_death"))
 		get_node("GroundedTimer").start()
 	net_disappear()
 
@@ -39,5 +39,5 @@ func net_disappear():
 
 func _ready():
 	net_scene = load(get_node("/root/global").powerup_effects_dir+"Net.tscn")
-	get_node("GroundedTimer").connect("timeout", self, "effect_finish")
-	get_node("DurationTimer").connect("timeout", self, "net_disappear")
+	get_node("GroundedTimer").connect("timeout", Callable(self, "effect_finish"))
+	get_node("DurationTimer").connect("timeout", Callable(self, "net_disappear"))

@@ -1,0 +1,17 @@
+[remap]
+
+importer="font_data_bmfont"
+type="FontFile"
+uid="uid://du3c65mnjy63w"
+path="res://.godot/imported/nokia.fnt-fb2535cd979162416bf16d9509a71e74.fontdata"
+
+[deps]
+
+source_file="res://assets/fonts/bitmaps/nokia.fnt"
+dest_files=["res://.godot/imported/nokia.fnt-fb2535cd979162416bf16d9509a71e74.fontdata"]
+
+[params]
+
+fallbacks=[]
+compress=true
+scaling_mode=2

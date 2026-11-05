@@ -26,7 +26,7 @@ func queue_respawn(mon):
 	if mon.stocks > 0:
 		mon.stocks -= 1
 		remove_child(mon)
-		yield(get_tree().create_timer(1.5), "timeout")
+		await get_tree().create_timer(1.5).timeout
 		mon.isAlive = true
 		mon.set_position(mon.spawn_point)
 		add_child(mon)
@@ -44,9 +44,9 @@ func round_finish(winner):
 	round_finished = true
 	get_node("/root/global").increase_player_score(winner)
 	Engine.time_scale = 0.6
-	yield(get_tree().create_timer(2), "timeout")
+	await get_tree().create_timer(2).timeout
 	Engine.time_scale = 1
-	get_tree().change_scene("res://Stages/scoreboard/Scoreboard.tscn")
+	get_tree().change_scene_to_file("res://Stages/scoreboard/Scoreboard.tscn")
 
 func _ready():
 	# Stage configuration
@@ -54,19 +54,20 @@ func _ready():
 	players = get_node("/root/global").player_list
 	for player in players:
 		not_playing.erase(player.number)
-		var node_name = "player"+var2str(player.number)
+		var node_name = "player"+var_to_str(player.number)
 		get_node(node_name).player = player.number
 		get_node(node_name).controller = player.controller_device
 		get_node(node_name).spawn_point = get_node(node_name).get_position()
-		var tex = load("res://assets/images/m_0"+var2str(player.monster)+"_"+player.color+".png")
-		tex.set_flags(0)
-		get_node(node_name+"/Sprite").set_texture(tex)
+		var tex = load("res://assets/images/m_0"+var_to_str(player.monster)+"_"+player.color+".png")
+		var sprite = get_node(node_name+"/Sprite2D")
+		sprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+		sprite.set_texture(tex)
 		get_node(node_name).set_color(player.color)
-		get_node(node_name).connect("on_kill", self, "_on_player_kill")
-		get_node(node_name).connect("on_death", self, "_on_player_death")
+		get_node(node_name).connect("on_kill", Callable(self, "_on_player_kill"))
+		get_node(node_name).connect("on_death", Callable(self, "_on_player_death"))
 	
 	players_alive = players.size()
 	
 	# Remove unused players
 	for p in not_playing:
-		get_node("player"+var2str(p)).queue_free()
+		get_node("player"+var_to_str(p)).queue_free()

@@ -1,4 +1,4 @@
-extends Particles2D
+extends GPUParticles2D
 
 func setup(color):
 	get_process_material().set_color(color)

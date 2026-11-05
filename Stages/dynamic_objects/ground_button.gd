@@ -21,7 +21,7 @@ func timer_timeout():
 
 func _ready():
 	timer = get_node("Timer")
-	timer.connect("timeout", self, "timer_timeout")
+	timer.connect("timeout", Callable(self, "timer_timeout"))
 	get_node("Spikes1/AnimationPlayer").play("Lower")
 	get_node("Spikes2/AnimationPlayer").play("Lower")
 	pass

@@ -50,7 +50,7 @@ func prev_mon():
 	update_textures()
 
 func update_textures():
-	var mon_number = var2str(selected_monster)
+	var mon_number = var_to_str(selected_monster)
 	var mon_tex = load("res://assets/images/m_0"+mon_number+"_"+colors[selected_color]+".png")
 	mon_sprite.set_texture(mon_tex)
 

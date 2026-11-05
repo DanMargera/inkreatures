@@ -7,13 +7,13 @@ func effect(player):
 	player.remove_powerup()
 	player.time_flow = 1.25
 	get_parent().get_node("PowerupAnimations").play("Pepper")
-	mon.connect("on_death", self, "effect_finish")
+	mon.connect("on_death", Callable(self, "effect_finish"))
 	get_node("DurationTimer").start()
 
 func effect_finish():
-	get_node("Sprite").hide()
+	get_node("Sprite2D").hide()
 	get_parent().get_node("PowerupAnimations").stop(true)
 	mon.time_flow = 1
 
 func _ready():
-	get_node("DurationTimer").connect("timeout", self, "effect_finish")
+	get_node("DurationTimer").connect("timeout", Callable(self, "effect_finish"))

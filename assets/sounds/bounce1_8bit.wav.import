@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/bounce1_8bit.wav-34f534489e07c4a3eae937d3aceb134b.sample"
+type="AudioStreamWAV"
+uid="uid://cmtsukkaicwak"
+path="res://.godot/imported/bounce1_8bit.wav-34f534489e07c4a3eae937d3aceb134b.sample"
 
 [deps]
 
 source_file="res://assets/sounds/bounce1_8bit.wav"
-dest_files=[ "res://.import/bounce1_8bit.wav-34f534489e07c4a3eae937d3aceb134b.sample" ]
+dest_files=["res://.godot/imported/bounce1_8bit.wav-34f534489e07c4a3eae937d3aceb134b.sample"]
 
 [params]
 

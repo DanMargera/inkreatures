@@ -2,7 +2,7 @@ extends Node2D
 
 var mon = null
 var tag_cooldown = false
-export var timer_duration = 5
+@export var timer_duration = 5
 
 var spark_positions = [Vector2(8,-6), Vector2(6,-5), Vector2(4,-8), Vector2(2,-7), Vector2(0,-6)]
 
@@ -22,11 +22,11 @@ func on_collision(player1, player2):
 	var tagged = player1
 	if (tagged == mon):
 		tagged = player2
-	mon.disconnect("on_death", self, "on_death")
-	mon.disconnect("player_collision", self, "on_collision")
+	mon.disconnect("on_death", Callable(self, "on_death"))
+	mon.disconnect("player_collision", Callable(self, "on_collision"))
 	var powerup_animations = get_parent().get_node("PowerupAnimations")
 	if (powerup_animations.get_current_animation() == "BombermonAcquire"):
-		powerup_animations.stop()
+		powerup_animations.stop(true)
 	display_overhead_icon(false)
 	var bombermon = tagged.get_node("PowerupEffects").get_node("Bombermon")
 	bombermon.tag_player(tagged, get_node("DurationTimer").get_time_left())
@@ -34,8 +34,8 @@ func on_collision(player1, player2):
 
 func tag_player(player, time_left):
 	mon = player
-	mon.connect("on_death", self, "on_death")
-	mon.connect("player_collision", self, "on_collision")
+	mon.connect("on_death", Callable(self, "on_death"))
+	mon.connect("player_collision", Callable(self, "on_collision"))
 	mon.get_node("PowerupEffects").get_node("PowerupAnimations").play("BombermonAcquire")
 	display_overhead_icon(true)
 	get_node("DurationTimer").start(time_left)
@@ -45,8 +45,8 @@ func effect(player):
 	tag_player(player, timer_duration)
 
 func effect_finish():
-	mon.disconnect("on_death", self, "on_death")
-	mon.disconnect("player_collision", self, "on_collision")
+	mon.disconnect("on_death", Callable(self, "on_death"))
+	mon.disconnect("player_collision", Callable(self, "on_collision"))
 	var bodies = get_node("Area2D").get_overlapping_bodies()
 	display_overhead_icon(false)
 	for body in bodies:
@@ -66,12 +66,12 @@ func _process(delta):
 
 func on_death(mon):
 	get_node("DurationTimer").stop()
-	get_parent().get_parent().disconnect("on_death", self, "on_death")
-	get_parent().get_parent().disconnect("player_collision", self, "on_collision")
+	get_parent().get_parent().disconnect("on_death", Callable(self, "on_death"))
+	get_parent().get_parent().disconnect("player_collision", Callable(self, "on_collision"))
 	display_overhead_icon(false)
 	get_parent().get_parent().remove_powerup()
 
 func _ready():
-	get_parent().get_parent().connect("turn_left", self, "flip_h")
-	get_parent().get_parent().connect("turn_right", self, "reset_flip_h")
-	get_node("DurationTimer").connect("timeout", self, "effect_finish")
+	get_parent().get_parent().connect("turn_left", Callable(self, "flip_h"))
+	get_parent().get_parent().connect("turn_right", Callable(self, "reset_flip_h"))
+	get_node("DurationTimer").connect("timeout", Callable(self, "effect_finish"))

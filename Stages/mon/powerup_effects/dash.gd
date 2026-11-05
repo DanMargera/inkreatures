@@ -9,7 +9,7 @@ func dash():
 func effect(player):
 	if (mon == null):
 		mon = player
-		mon.connect("on_death", self, "effect_finish")
+		mon.connect("on_death", Callable(self, "effect_finish"))
 		get_parent().get_node("PowerupAnimations").play("Dash")
 		get_node("DurationTimer").start()
 	elif (get_node("DashCooldown").is_stopped()):
@@ -18,8 +18,8 @@ func effect(player):
 func effect_finish():
 	mon.remove_powerup()
 	mon = null
-	get_node("Sprite").hide()
+	get_node("Sprite2D").hide()
 	get_parent().get_node("PowerupAnimations").stop(true)
 
 func _ready():
-	get_node("DurationTimer").connect("timeout", self, "effect_finish")
+	get_node("DurationTimer").connect("timeout", Callable(self, "effect_finish"))

@@ -12,9 +12,9 @@ func effect(player):
 	if (state == states.OFF):
 		state = states.ON
 		mon = player
-		player.connect("surface_collision", self, "landed")
-		player.connect("on_death", self, "effect_finish")
-		player.connect("on_jump", self, "on_jump")
+		player.connect("surface_collision", Callable(self, "landed"))
+		player.connect("on_death", Callable(self, "effect_finish"))
+		player.connect("on_jump", Callable(self, "on_jump"))
 		get_parent().get_node("PowerupAnimations").play("RocketsReady")
 		get_node("DurationTimer").start()
 	elif (state == states.ON and not player.smashing):
@@ -39,8 +39,8 @@ func reset_accel():
 	mon.upwards_accel = 0
 
 func effect_finish():
-	mon.disconnect("surface_collision", self, "landed")
-	mon.disconnect("on_jump", self, "on_jump")
+	mon.disconnect("surface_collision", Callable(self, "landed"))
+	mon.disconnect("on_jump", Callable(self, "on_jump"))
 	if (mon.powerup == get_node("/root/global").powerup_types.ROCKETS):
 		mon.remove_powerup()
 	get_node("BackSprite").hide()
@@ -51,5 +51,5 @@ func effect_finish():
 	mon.upwards_accel = 0
 
 func _ready():
-	get_node("DurationTimer").connect("timeout", self, "effect_finish")
-	get_node("FlyingTimer").connect("timeout", self, "reset_accel")
+	get_node("DurationTimer").connect("timeout", Callable(self, "effect_finish"))
+	get_node("FlyingTimer").connect("timeout", Callable(self, "reset_accel"))
